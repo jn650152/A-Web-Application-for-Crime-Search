@@ -1,0 +1,16 @@
+./cassandra
+./cqlsh 35.165.192.95 9042 -u iccassandra -p 6ff6a637af15ca024e58dd4742f807f9
+
+create database:
+CREATE KEYSPACE test_db WITH replication = {'class' : 'SimpleStrategy' , 'replication_factor' : 1};
+
+USE test_db
+CREATE TABLE crime ( Dc_Dist int, Psa text, Dispatch_Date date, Dispatch_Time time, Hour int, Dc_Key text PRIMARY KEY, Location_Block text, UCR_General int, Text_General_Code text, Shape text, Police_District int);
+COPY test_db.crime(Dc_Dist, Psa, Dispatch_Date, Dispatch_Time, Hour, Dc_Key, Location_Block, UCR_General, Text_General_Code, Shape,Police_district) FROM '/Users/jluo/Google Drive/data_analytics/assign2/PPD_Crime_Incidents_2006-Present.csv' with delimiter=',';
+
+queries:
+SELECT Text_General_Code FROM test.crime WHERE Dc_Key = '200604018246';  
+SELECT UCR_General FROM test.crime WHERE Dc_Key = '200604018246';  
+ELECT Dispatch_Date FROM crime WHERE Text_General_Code = 'Thefts' ALLOW FILTERING;
+SELECT Hour FROM crime WHERE Text_General_Code = 'Thefts' ALLOW FILTERING;
+

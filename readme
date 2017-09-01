@@ -1,0 +1,19 @@
+additional installation:
+I implemented RESTFUL services using Node.js.
+So I installed node.js on both instances following the steps in https://www.tutorialspoint.com/nodejs/nodejs_environment_setup.htm
+
+Because I used express framewrk, I installed something according https://www.tutorialspoint.com/nodejs/nodejs_express_framework.htm
+and install cassandra driver by command  npm installcassandra-driver on both instances.
+
+execution instructions:
+log in EC2 intances using 
+ssh -i VmKey.pem.txt ubuntu@ec2-52-202-48-81.compute-1.amazonaws.com,
+ssh -i VmKey.pem.txt ubuntu@ec2-54-198-203-19.compute-1.amazonaws.com repectively.
+cd /opt/tomcat/webapps/ROOT
+Add /usr/local/nodejs/bin to the PATH environment variable.
+node test.js
+
+check load balancer status
+note: sometimes need to reset health check so that instances are inservice.(just change the value of Unhealthy threshold as 9 for example)
+
+now go to http://a-818399759.us-east-1.elb.amazonaws.com/index.htm to query.
